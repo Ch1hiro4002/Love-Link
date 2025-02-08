@@ -1,6 +1,6 @@
 // src/Components/Login/Login.ts
 
-import Logo from '../../asset/Logo/Logo'
+import Logo from '../../assets/Logo/Logo'
 import LoginBox from './Components/Login_Box/LoginBox'
 
 const Login = () => {

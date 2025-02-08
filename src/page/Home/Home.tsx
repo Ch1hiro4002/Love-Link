@@ -1,6 +1,6 @@
 // src/page/Home/Home.tsx
 
-import Logo from "../../asset/Logo/Logo";
+import Logo from "../../assets/Logo/Logo";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
