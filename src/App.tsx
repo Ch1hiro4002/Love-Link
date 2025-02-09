@@ -3,17 +3,20 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Home from "./page/Home/Home";
 import Login from "./page/Login/Login";
 import Game from "./page/Game/Game";
+import { UserProvider } from "./context/UserContext";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <BodyClassManager />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/game" element={<Game />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <BodyClassManager />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/game" element={<Game />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 };
 

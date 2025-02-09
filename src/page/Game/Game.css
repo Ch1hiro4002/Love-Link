@@ -6,53 +6,29 @@
 }
 .up-container {
     flex: 8; /* 占 80% */
-    background-color: #FF4D6D; 
+    background-color: #ffff; 
 }
 
 .down-container {
     flex: 2; /* 占 20% */
-    background-color: #7F5AF0; 
+    background-color: #FF4D6D; 
     display: flex;
     flex-direction: row; /* 横向排列 */
-}
-
-.action-button {
-    flex: 1;
-    margin: 5px;
-    background-color: rosybrown;
-    padding: 10px; /* 内边距 */
-    box-sizing: border-box; /* 确保 padding 不影响宽度 */
-    border-radius: 10px
-}
-
-.ac-button {
-    width: 100%;
-    height: 35px;
-    padding: 5px;
-    margin: 5px 0; /* 按钮之间的间距 */
-    background-color: rgba(255, 255, 255, 0.2); /* 半透明背景 */
-    color: white; /* 文字颜色 */
-    text-align: center; /* 文字居中 */
-    border-radius: 5px; /* 圆角 */
-    cursor: pointer; /* 鼠标悬停时显示手型 */
-    transition: background-color 0.3s ease; /* 悬停动画 */
-}
-
-.ac-button:hover {
-    background-color: rgba(255, 255, 255, 0.3); /* 悬停时背景变亮 */
 }
 
 .backpack {
     flex: 9;
     margin: 5px;
-    background-color: rosybrown;
+    background-color: #FFC0CB;
     padding: 10px; /* 内边距 */
     box-sizing: border-box; /* 确保 padding 不影响宽度 */
     border-radius: 10px;
     display: grid;
     grid-template-columns: repeat(8, 1fr); /* 每行 4 个格子 */
     gap: 10px; /* 格子之间的间距 */
+    position: relative;
 }
+
 
 .slot {
     background-color: rgba(255, 255, 255, 0.1); /* 格子背景 */
@@ -61,4 +37,6 @@
     padding: 10px;
     text-align: center; /* 文字居中 */
     color: white; /* 文字颜色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
+

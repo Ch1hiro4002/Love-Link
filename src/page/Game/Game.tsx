@@ -2,8 +2,8 @@
 
 import Logo from '../../assets/Logo/Logo'
 import  Sidebar  from "./Components/Up_Part/Sidebar/Sidebar";
+import Button from './Components/Down_Part/Button/Button';
 import './Game.css'
-
 const Game = () => {
     return(
         <div className="game-container">
@@ -16,16 +16,7 @@ const Game = () => {
                 </div>
             </div>
             <div className="down-container">
-                <div className='action-button'>
-                    <div className="button-group">
-                        <div className="ac-button">商场</div>
-                        <div className="ac-button">设置</div>
-                    </div>
-                    <div className="button-group">
-                        <div className="ac-button">帮助</div>
-                        <div className="ac-button">退出</div>
-                    </div>
-                </div>
+                <Button />
                 <div className='backpack'>
                     <div className="slot">格子 1</div>
                     <div className="slot">格子 2</div>

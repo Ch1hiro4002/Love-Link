@@ -1,4 +1,4 @@
-import { ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
+import { ConnectButton } from "@mysten/dapp-kit";
 import { Ed25519Keypair } from '@mysten/sui/keypairs/ed25519';
 import { useState, useRef, useEffect } from "react";
 import { FaCopy } from 'react-icons/fa'; 
@@ -11,8 +11,7 @@ const LoginBox = () => {
     const aContainer = useRef<HTMLDivElement>(null);
     const bContainer = useRef<HTMLDivElement>(null);
     const switchCircle = useRef<NodeListOf<Element>>();
-    const account = useCurrentAccount();
-    const userAddress = account?.address;
+
 
     const [walletInfo, setWalletInfo] = useState({ address: '', privateKey: '' });
     const [showModal, setShowModal] = useState(false);
@@ -73,44 +72,36 @@ const LoginBox = () => {
     }, []);
 
     return (
-        <>
-            {!userAddress ? (
-                <div className="login-box">
-                    <div className="container a-container" id="a-container" ref={aContainer}>
-                        <form className="form" id="a-form">
-                            <h2 className="title a-title">Create Wallet</h2>
-                            <button type="button" className="button" onClick={createWallet}>Create Wallet</button>
-                        </form>
-                    </div>
+        <div className="login-box">
+            <div className="container a-container" id="a-container" ref={aContainer}>
+                <form className="form" id="a-form">
+                    <h2 className="title a-title">Create Wallet</h2>
+                    <button type="button" className="button" onClick={createWallet}>Create Wallet</button>
+                </form>
+            </div>
 
-                    <div className="container b-container" id="b-container" ref={bContainer}>
-                        <form className="form" id="b-form">
-                            <h2 className="title b-title">Connect Wallet</h2>
-                            <p>Click the button to start your dating journey !<br/></p>
-                            <ConnectButton />
-                        </form>
-                    </div>
+            <div className="container b-container" id="b-container" ref={bContainer}>
+                <form className="form" id="b-form">
+                    <h2 className="title b-title">Connect Wallet</h2>
+                    <p>Click the button to start your dating journey !<br/></p>
+                    <ConnectButton />
+                </form>
+            </div>
 
-                    <div className="switch" id="switch-cnt" ref={switchCtn}>
-                        <div className="switch__circle"></div>
-                        <div className="switch__circle switch__circle-t"></div>
-                        <div className="switch__container" id="switch-c1" ref={switchC1}>
-                            <h2 className="switch__title title" style={{letterSpacing: 0}}>Welcome Back !</h2>
-                            <p className="switch__description description">You already have the wallet, go and connect it !</p>
-                            <button className="switch__button button switch-btn">Connect Wallet</button>
-                        </div>
-                        <div className="switch__container is-hidden" id="switch-c2" ref={switchC2}>
-                            <h2 className="switch__title title" style={{letterSpacing: 0}}>Hello Friend !</h2>
-                            <p className="switch__description description">If you don’t have a wallet yet, create one !</p>
-                            <button className="switch__button button switch-btn">Create Wallet</button>
-                        </div>
-                    </div>
+            <div className="switch" id="switch-cnt" ref={switchCtn}>
+                <div className="switch__circle"></div>
+                <div className="switch__circle switch__circle-t"></div>
+                <div className="switch__container" id="switch-c1" ref={switchC1}>
+                    <h2 className="switch__title title" style={{letterSpacing: 0}}>Welcome Back !</h2>
+                    <p className="switch__description description">You already have the wallet, go and connect it !</p>
+                    <button className="switch__button button switch-btn">Connect Wallet</button>
                 </div>
-            ) : (
-                <div>HHHHH</div> 
-            )}
-        
-
+                <div className="switch__container is-hidden" id="switch-c2" ref={switchC2}>
+                    <h2 className="switch__title title" style={{letterSpacing: 0}}>Hello Friend !</h2>
+                    <p className="switch__description description">If you don’t have a wallet yet, create one !</p>
+                    <button className="switch__button button switch-btn">Create Wallet</button>
+                </div>
+            </div>
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
@@ -133,7 +124,7 @@ const LoginBox = () => {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

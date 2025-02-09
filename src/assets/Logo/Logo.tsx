@@ -2,13 +2,12 @@
 
 import { useNavigate } from "react-router-dom";
 import './Logo.css';
-import React from "react";
 
 const Logo = () => {
     const navigate = useNavigate();
     return(
         <div>
-            <img className="logo" src='../../../public/logo2.png' alt='logo' onClick={() => navigate("/")}/>
+            <img className="logo" src='../../../public/logo.png' alt='logo' onClick={() => navigate("/")}/>
         </div>
     )
 };
