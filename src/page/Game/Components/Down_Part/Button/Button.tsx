@@ -2,7 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FaQuestionCircle, FaShoppingCart, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { useUser } from '../../../../../context/UserContext';
+import { buyGift } from "../../../../../interaction/BuyGift";
 import './Button.css';
+import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
+import { queryGiftBag } from "../../../../../data/query"
 
 const Button = () => {
     const navigate = useNavigate();
@@ -11,6 +14,9 @@ const Button = () => {
     const [showUserModal, setShowUserModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [showLogout, setShowLogout] = useState(false);
+    const {mutate: signAndExecute} = useSignAndExecuteTransaction();
+    const account = useCurrentAccount();
+    const userAddress = account?.address;
 
     // 退出按钮触发
     useEffect(() => {
@@ -18,6 +24,27 @@ const Button = () => {
             navigate('/');
         }
     }, [showLogout]);
+
+    // 购买礼物函数
+    const handleBuyGift  = async (name: string, description: string, image_url: string, data: any, giftBag: any) => {
+        const tx = await buyGift(
+            name,
+            description,
+            image_url,
+            data,
+            giftBag
+        );
+        signAndExecute({
+          transaction: tx
+        }, {
+          onSuccess: () => {
+            console.log("Buy Gift Success!");
+          },
+          onError: (error) => {
+            console.log(error);
+          }
+        });
+      };
 
     return (
         <div className='action-button'>
@@ -63,7 +90,13 @@ const Button = () => {
                             <div className="shop-item">
                                 <img src="roses.jpg" alt="玫瑰花" />
                                 <p>玫瑰花</p>
-                                <button>购买</button>
+                                <button onClick={async () => handleBuyGift(
+                                    "roses",
+                                    "A romantic bouquet of roses!",
+                                    "https://aggregator.walrus-testnet.walrus.space/v1/blobs/giFVw26yqGNSOZ-wS8qOO5uX9cSPFsGySLMjGmdQ7WM",
+                                    10,
+                                    await queryGiftBag(userAddress as string),
+                                ) }>购买</button>
                             </div>
                             <div className="shop-item">
                                 <img src="love_letter.jpg" alt="情书" />
