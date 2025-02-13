@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FaQuestionCircle, FaShoppingCart, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { useUser } from '../../../../../context/UserContext';
-import { buyGift } from "../../../../../interaction/BuyGift";
+import { BuyGift } from "../../../../../interaction/BuyGift";
 import './Button.css';
 import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { queryGiftBag } from "../../../../../data/query"
@@ -26,18 +26,20 @@ const Button = () => {
     }, [showLogout]);
 
     // 购买礼物函数
-    const handleBuyGift  = async (name: string, description: string, image_url: string, data: any, giftBag: any) => {
-        const tx = await buyGift(
+    const handleBuyGift  = async (name: string, description: string, image_url: string, data: any, giftBag: any, price: number) => {
+        const tx = await BuyGift(
             name,
             description,
             image_url,
             data,
-            giftBag
+            giftBag,
+            price
         );
         signAndExecute({
           transaction: tx
         }, {
           onSuccess: () => {
+            alert("Buy Gift Success!");
             console.log("Buy Gift Success!");
           },
           onError: (error) => {
@@ -54,14 +56,14 @@ const Button = () => {
                     className="ac-button"
                     onClick={() => { setShowShopModal(true) }}
                 >
-                    <FaShoppingCart /> 商场
+                    <FaShoppingCart /> Store
                 </button>
                 <button
                     type="button"
                     className="ac-button"
                     onClick={() => { setShowUserModal(true) }}
                 >
-                    <FaUser /> 个人
+                    <FaUser /> Profile
                 </button>
             </div>
             <div className="button-group">
@@ -69,14 +71,14 @@ const Button = () => {
                     type="button"
                     className="ac-button"
                 >
-                    <FaQuestionCircle /> 帮助
+                    <FaQuestionCircle /> Help
                 </button>
                 <button
                     type="button"
                     className="ac-button"
                     onClick={() => { setShowLogout(true) }}
                 >
-                    <FaSignOutAlt /> 退出
+                    <FaSignOutAlt /> Exit
                 </button>
             </div>
 
@@ -84,41 +86,63 @@ const Button = () => {
             {showShopModal && (
                 <div className="shop-modal-overlay">
                     <div className="shop-modal-content">
-                        <h2>商店</h2>
+                        <h2>Store</h2>
                         <div className="shop-items">
                             {/* 商品列表 */}
                             <div className="shop-item">
-                                <img src="roses.jpg" alt="玫瑰花" />
-                                <p>玫瑰花</p>
+                                <img src="roses.jpg" alt="Roses" />
+                                <p>Roses<br/>0.5 SUI</p>
                                 <button onClick={async () => handleBuyGift(
                                     "roses",
                                     "A romantic bouquet of roses!",
                                     "https://aggregator.walrus-testnet.walrus.space/v1/blobs/giFVw26yqGNSOZ-wS8qOO5uX9cSPFsGySLMjGmdQ7WM",
                                     10,
                                     await queryGiftBag(userAddress as string),
-                                ) }>购买</button>
+                                    0.5
+                                ) }>Buy</button>
                             </div>
                             <div className="shop-item">
-                                <img src="love_letter.jpg" alt="情书" />
-                                <p>情书</p>
-                                <button>购买</button>
+                                <img src="love_letter.jpg" alt="Loveletter" />
+                                <p>Loveletter<br/>0.5 SUI</p>
+                                <button onClick={async () => handleBuyGift(
+                                    "loveletter",
+                                    "A love letter full of love!",
+                                    "https://aggregator.walrus-testnet.walrus.space/v1/blobs/Ou99Ya88iG1E1Gi4QEL2LYhitjrBGNdgbBHGP-rYoPo",
+                                    15,
+                                    await queryGiftBag(userAddress as string),
+                                    0.5
+                                )}>Buy</button>
                             </div>
                             <div className="shop-item">
-                                <img src="necklace.jpg" alt="项链" />
-                                <p>项链</p>
-                                <button>购买</button>
+                                <img src="necklace.jpg" alt="necklace" />
+                                <p>necklace<br/>5 SUI</p>
+                                <button onClick={async () => handleBuyGift(
+                                    "necklace",
+                                    "A sapphire necklace!",
+                                    "https://aggregator.walrus-testnet.walrus.space/v1/blobs/Zbf5lCCuOBDP-deV5hIuB3sRLuQ38DdCyzn2B0_hLJU",
+                                    45,
+                                    await queryGiftBag(userAddress as string),
+                                    5
+                                )}>Buy</button>
                             </div>
                             <div className="shop-item">
-                                <img src="tickets.jpg" alt="电影票" />
-                                <p>电影票</p>
-                                <button>购买</button>
+                                <img src="tickets.jpg" alt="tickets" />
+                                <p>tickets<br/>1 SUI</p>
+                                <button onClick={async () => handleBuyGift(
+                                    "tickets",
+                                    "Two movie tickets for Titanic!",
+                                    "https://aggregator.walrus-testnet.walrus.space/v1/blobs/nwMAQo70Yns65Nvrzcu-Jvhafqlt--R6vErYPe1-8Us",
+                                    25,
+                                    await queryGiftBag(userAddress as string),
+                                    1
+                                )}>Buy</button>
                             </div>
                         </div>
                         <button
                             className="close-button"
                             onClick={() => setShowShopModal(false)}
                         >
-                            关闭
+                            Close
                         </button>
                     </div>
                 </div>
@@ -128,7 +152,7 @@ const Button = () => {
             {showUserModal && (
                 <div className="user-modal-overlay">
                     <div className="user-modal-content">
-                        <h2>个人信息</h2>
+                        <h2>Profile</h2>
                         <div className="user-info">
                             {isEditing ? (
                                 <form onSubmit={(e) => {
@@ -136,7 +160,7 @@ const Button = () => {
                                     setIsEditing(false);
                                 }}>
                                     <div>
-                                        <label>姓名：</label>
+                                        <label>Name：</label>
                                         <input
                                             type="text"
                                             value={userInfo.name}
@@ -144,7 +168,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>年龄：</label>
+                                        <label>Age：</label>
                                         <input
                                             type="text"
                                             value={userInfo.age}
@@ -152,7 +176,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>性格：</label>
+                                        <label>Disposition：</label>
                                         <input
                                             type="text"
                                             value={userInfo.personality}
@@ -160,7 +184,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>学历：</label>
+                                        <label>Degree：</label>
                                         <input
                                             type="text"
                                             value={userInfo.education}
@@ -168,7 +192,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>外貌特征：</label>
+                                        <label>Appearance：</label>
                                         <input
                                             type="text"
                                             value={userInfo.appearance}
@@ -176,7 +200,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>家庭背景：</label>
+                                        <label>Background：</label>
                                         <input
                                             type="text"
                                             value={userInfo.familyBackground}
@@ -184,7 +208,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>经济情况：</label>
+                                        <label>Finances：</label>
                                         <input
                                             type="text"
                                             value={userInfo.wealth}
@@ -192,7 +216,7 @@ const Button = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>头像：</label>
+                                        <label>Avatar：</label>
                                         <input
                                             type="file"
                                             accept="image/*"
@@ -203,24 +227,24 @@ const Button = () => {
                                             }}
                                         />
                                     </div>
-                                    <button type="submit" className='save-button'>保存</button>
+                                    <button type="submit" className='save-button'>Save</button>
                                 </form>
                             ) : (
                                 <>
                                     {userInfo.avatar && (
                                         <img
                                             src={URL.createObjectURL(userInfo.avatar)}
-                                            alt="头像"
+                                            alt="Avatar"
                                             className="user-avatar"
                                         />
                                     )}
-                                    <p><strong>姓名：</strong>{userInfo.name || '未填写'}</p>
-                                    <p><strong>年龄：</strong>{userInfo.age || '未填写'}</p>
-                                    <p><strong>性格：</strong>{userInfo.personality || '未填写'}</p>
-                                    <p><strong>学历：</strong>{userInfo.education || '未填写'}</p>
-                                    <p><strong>外貌特征：</strong>{userInfo.appearance || '未填写'}</p>
-                                    <p><strong>家庭背景：</strong>{userInfo.familyBackground || '未填写'}</p>
-                                    <p><strong>经济情况：</strong>{userInfo.wealth || '未填写'}</p>
+                                    <p><strong>Name：</strong>{userInfo.name || 'NULL'}</p>
+                                    <p><strong>Age：</strong>{userInfo.age || 'NULL'}</p>
+                                    <p><strong>Disposition：</strong>{userInfo.personality || 'NULL'}</p>
+                                    <p><strong>Degree：</strong>{userInfo.education || 'NULL'}</p>
+                                    <p><strong>Appearance：</strong>{userInfo.appearance || 'NULL'}</p>
+                                    <p><strong>Background：</strong>{userInfo.familyBackground || 'NULL'}</p>
+                                    <p><strong>Finances：</strong>{userInfo.wealth || 'NULL'}</p>
                                 </>
                             )}
                         </div>
@@ -229,13 +253,13 @@ const Button = () => {
                                 className="edit-button"
                                 onClick={() => setIsEditing(!isEditing)}
                             >
-                                {isEditing ? '取消' : '修改信息'}
+                                {isEditing ? 'Cancel' : 'Revise'}
                             </button>
                             <button
                                 className="close-button"
                                 onClick={() => setShowUserModal(false)}
                             >
-                                关闭
+                                Close
                             </button>
                         </div>
                     </div>

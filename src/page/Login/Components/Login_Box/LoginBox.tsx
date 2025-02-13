@@ -104,7 +104,7 @@ const LoginBox = () => {
             </div>
             {showModal && (
                 <div className="modal-overlay">
-                    <div className="modal-content">
+                    <div className="modal-content-a">
                         <h3>Wallet created successfully!</h3>
                         <p>
                             Address：{walletInfo.address}

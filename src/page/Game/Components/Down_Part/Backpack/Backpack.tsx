@@ -2,7 +2,7 @@ import { useCurrentAccount, useSignAndExecuteTransaction } from "@mysten/dapp-ki
 import { queryGiftBag } from "../../../../../data/query.ts"
 import { suiClient } from "../../../../../networkConfig"
 import { GiftBagObject } from '../../../../../type/type.ts'
-import "./Backpack_v2.css";
+import "./Backpack.css";
 import { useEffect, useState } from "react";
 import { SendGift } from '../../../../../interaction/SendGift'
 

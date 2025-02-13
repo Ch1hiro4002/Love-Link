@@ -214,7 +214,7 @@
     z-index: 1000;
 }
 
-.modal-content {
+.modal-content-a {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -229,25 +229,25 @@
     border: none;
     cursor: pointer;
     margin-left: 10px;
-    color: #007bff;
+    color: #FF4D6D;
     font-size: 16px;
 }
 
 .icon-button:hover {
-    color: #0056b3;
+    color: #FF4D6D;
 }
 
 /* 关闭按钮样式 */
-.modal-content button {
+.modal-content-a button {
     margin-top: 10px;
     padding: 5px 10px;
-    background: #007bff;
+    background: #FF4D6D;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.modal-content button:hover {
-    background: #0056b3;
+.modal-content-a button:hover {
+    background: #FF4D6D;
 }
