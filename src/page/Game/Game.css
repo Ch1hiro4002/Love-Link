@@ -19,27 +19,5 @@
     flex-direction: row; /* 横向排列 */
 }
 
-.backpack {
-    flex: 9;
-    margin: 5px;
-    background-color: #FFC0CB;
-    padding: 10px; /* 内边距 */
-    box-sizing: border-box; /* 确保 padding 不影响宽度 */
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr); /* 每行 4 个格子 */
-    gap: 10px; /* 格子之间的间距 */
-    position: relative;
-}
 
-
-.slot {
-    background-color: rgba(255, 255, 255, 0.1); /* 格子背景 */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* 边框 */
-    border-radius: 5px; /* 圆角 */
-    padding: 10px;
-    text-align: center; /* 文字居中 */
-    color: white; /* 文字颜色 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-}
 

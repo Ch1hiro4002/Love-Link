@@ -3,6 +3,7 @@
 import Logo from '../../assets/Logo/Logo'
 import  Sidebar  from "./Components/Up_Part/Sidebar/Sidebar";
 import Button from './Components/Down_Part/Button/Button';
+import Backpack from './Components/Down_Part/Backpack/Backpack';
 import './Game.css'
 const Game = () => {
     return(
@@ -17,16 +18,7 @@ const Game = () => {
             </div>
             <div className="down-container">
                 <Button />
-                <div className='backpack'>
-                    <div className="slot">格子 1</div>
-                    <div className="slot">格子 2</div>
-                    <div className="slot">格子 3</div>
-                    <div className="slot">格子 4</div>
-                    <div className="slot">格子 5</div>
-                    <div className="slot">格子 6</div>
-                    <div className="slot">格子 7</div>
-                    <div className="slot">格子 8</div>
-                </div>
+                <Backpack />
             </div>
         </div>
     )

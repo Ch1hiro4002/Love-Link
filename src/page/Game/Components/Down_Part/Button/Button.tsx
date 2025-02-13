@@ -44,7 +44,7 @@ const Button = () => {
             console.log(error);
           }
         });
-      };
+    };
 
     return (
         <div className='action-button'>

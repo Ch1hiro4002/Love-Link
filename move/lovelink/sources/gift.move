@@ -16,7 +16,6 @@ module lovelink::gift {
         description: String,
         image_url: String,
         data: u64,
-        owner: address
     }
 
     public struct GiftBag has key {
@@ -92,7 +91,6 @@ module lovelink::gift {
             description,
             image_url,
             data,
-            owner
         };
 
         vector::push_back(&mut giftBag.gifts, object::id_to_address(&id));

@@ -1,6 +1,6 @@
 import { Transaction } from "@mysten/sui/transactions";
 import { networkConfig, suiClient} from "../networkConfig";
-import { GiftBag, Gift } from "../type/struct_type";
+import { GiftBag, Gift } from "../type/type";
 
 
 export const queryGiftBag = async () => {
