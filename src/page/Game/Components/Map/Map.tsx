@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Phaser from 'phaser';
 
-const Map: React.FC = () => {
+const Game: React.FC = () => {
   useEffect(() => {
-    const config = {
+    const config: Phaser.Types.Core.GameConfig = {
       type: Phaser.AUTO,
       width: 800,
       height: 600,
@@ -15,31 +15,41 @@ const Map: React.FC = () => {
       physics: {
         default: 'arcade',
         arcade: {
-          gravity: { x: 0,y: 0 },
+          gravity: { x: 0, y: 0 },
           debug: false,
         },
       },
     };
 
     const game = new Phaser.Game(config);
+    let audioContext: AudioContext | null = null;
 
     function preload(this: Phaser.Scene) {
+      this.load.image('tileset1', 'tilesets/tileset1.png');
+      this.load.image('tileset2', 'tilesets/tileset2.png');
       this.load.tilemapTiledJSON('map', 'maps/lovelink-map.json');
     }
 
     function create(this: Phaser.Scene) {
-        // 创建用户互动按钮
-        this.add.text(400, 300, 'Start Audio', { color: '#0f0' })
-            .setInteractive()
-            .on('pointerdown', () => {
-                // 创建 AudioContext
-                new AudioContext();
-                // 继续你的音频逻辑
-                console.log('AudioContext created');
-            });
+      this.input.once('pointerdown', () => {
+        if (!audioContext) {
+          audioContext = new AudioContext();
+        } else if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+      });
 
-        // 加载地图
-        this.make.tilemap({ key: 'map' });
+      const map = this.make.tilemap({ key: 'map' });
+      const tileset1 = map.addTilesetImage('TilesetNameInTiled1', 'tileset1');
+      const tileset2 = map.addTilesetImage('TilesetNameInTiled2', 'tileset2');
+
+      if (tileset1) {
+        map.createLayer('LayerNameInTiled1', tileset1, 0, 0);
+      }
+
+      if (tileset2) {
+        map.createLayer('LayerNameInTiled2', tileset2, 0, 0);
+      }
     }
 
     function update(this: Phaser.Scene) {
@@ -47,11 +57,11 @@ const Map: React.FC = () => {
     }
 
     return () => {
-      game.destroy(true); // 清理游戏实例
+      game.destroy(true);
     };
   }, []);
 
   return <div id="game-container" />;
 };
 
-export default Map;
+export default Game;

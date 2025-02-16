@@ -94,7 +94,7 @@ const Backpack = () => {
         };
       
         fetchNFTs();
-      }, [userAddress, suiClient]);
+      }, [userAddress, suiClient, nfts]);
 
       if (loading) return <div className="loading">Loading backpack...</div>;
       if (error) return <div className="error">{error}</div>;
@@ -112,7 +112,8 @@ const Backpack = () => {
         transaction: tx
       }, {
         onSuccess: () => {
-          window.location.reload();
+          setSelectedNft(null);
+          setShowTransferDialog(false);
           console.log("Send Gift Success!");
         },
         onError: (error) => {
@@ -161,7 +162,7 @@ const Backpack = () => {
                     <h3>{selectedNft.name}</h3>
                     <p>{selectedNft.description}</p>
                     <div className="affection-data">
-                    <span>好感度加成：</span>
+                    <span>Favorability：</span>
                     {selectedNft.data.toString()}
                     </div>
                 </div>
@@ -171,13 +172,13 @@ const Backpack = () => {
                     className="confirm-button"
                     onClick={() => setShowTransferDialog(true)}
                   >
-                    赠送
+                     Send
                   </button>
                   <button
                     className="cancel-button"
                     onClick={() => setSelectedNft(null)}
                   >
-                    关闭
+                    Close
                   </button>
                 </div>
               </div>
@@ -187,11 +188,11 @@ const Backpack = () => {
           {/* 赠送弹窗 */}
           {showTransferDialog && (
             <div className="transfer-dialog">
-              <h3>赠送 {selectedNft?.name}</h3>
+              <h3>Give Away {selectedNft?.name}</h3>
               <input
                 type="text"
                 className="address-input"
-                placeholder="输入接收方钱包地址"
+                placeholder="Enter the recipient’s wallet address"
                 value={recipientAddress}
                 onChange={(e) => setRecipientAddress(e.target.value)}
               />
@@ -200,13 +201,13 @@ const Backpack = () => {
                   className="confirm-button"
                   onClick={() => selectedNft && handleTransfer(selectedNft.id, recipientAddress) }
                 >
-                  确认
+                  Yes
                 </button>
                 <button
                   className="cancel-button"
                   onClick={() => setShowTransferDialog(false)}
                 >
-                  取消
+                  Cancel
                 </button>
               </div>
             </div>
