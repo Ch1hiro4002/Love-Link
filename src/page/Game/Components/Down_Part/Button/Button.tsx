@@ -91,38 +91,38 @@ const Button = () => {
                             {/* 商品列表 */}
                             <div className="shop-item">
                                 <img src="roses.jpg" alt="Roses" />
-                                <p>Roses<br/>0.5 SUI</p>
+                                <p>Roses<br/>1 SUI</p>
                                 <button onClick={async () => handleBuyGift(
                                     "roses",
                                     "A romantic bouquet of roses!",
                                     "https://aggregator.walrus-testnet.walrus.space/v1/blobs/giFVw26yqGNSOZ-wS8qOO5uX9cSPFsGySLMjGmdQ7WM",
                                     10,
                                     await queryGiftBag(userAddress as string),
-                                    0.5
+                                    1_000_000_000
                                 ) }>Buy</button>
                             </div>
                             <div className="shop-item">
                                 <img src="love_letter.jpg" alt="Loveletter" />
-                                <p>Loveletter<br/>0.5 SUI</p>
+                                <p>Loveletter<br/>1 SUI</p>
                                 <button onClick={async () => handleBuyGift(
                                     "loveletter",
                                     "A love letter full of love!",
                                     "https://aggregator.walrus-testnet.walrus.space/v1/blobs/Ou99Ya88iG1E1Gi4QEL2LYhitjrBGNdgbBHGP-rYoPo",
                                     15,
                                     await queryGiftBag(userAddress as string),
-                                    0.5
+                                    1_000_000_000
                                 )}>Buy</button>
                             </div>
                             <div className="shop-item">
                                 <img src="necklace.jpg" alt="necklace" />
-                                <p>necklace<br/>5 SUI</p>
+                                <p>necklace<br/>1 SUI</p>
                                 <button onClick={async () => handleBuyGift(
                                     "necklace",
                                     "A sapphire necklace!",
                                     "https://aggregator.walrus-testnet.walrus.space/v1/blobs/Zbf5lCCuOBDP-deV5hIuB3sRLuQ38DdCyzn2B0_hLJU",
                                     45,
                                     await queryGiftBag(userAddress as string),
-                                    5
+                                    1_000_000_000
                                 )}>Buy</button>
                             </div>
                             <div className="shop-item">
@@ -134,7 +134,7 @@ const Button = () => {
                                     "https://aggregator.walrus-testnet.walrus.space/v1/blobs/nwMAQo70Yns65Nvrzcu-Jvhafqlt--R6vErYPe1-8Us",
                                     25,
                                     await queryGiftBag(userAddress as string),
-                                    1
+                                    1_000_000_000
                                 )}>Buy</button>
                             </div>
                         </div>

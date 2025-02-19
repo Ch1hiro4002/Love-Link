@@ -1,7 +1,6 @@
 import { Transaction } from "@mysten/sui/transactions";
 import { networkConfig, suiClient} from "../networkConfig";
 import { GiftBag, Gift } from "../type/type";
-import { SUI_DECIMALS } from "@mysten/sui/utils";
 
 
 export const queryGiftBag = async () => {
@@ -24,11 +23,8 @@ export const queryGiftBag = async () => {
 
 export const BuyGift = async(name: string, description: string, image_url: string, data: any, giftBag: any, price: number) => {
     const packageID = networkConfig.testnet.packageID;
-    const adjustedAmount = BigInt(
-        price * Math.pow(10, SUI_DECIMALS)
-    );
     const tx = new Transaction();
-    const [coin] = tx.splitCoins(tx.gas, [adjustedAmount]);
+    const [coin] = tx.splitCoins(tx.gas, [tx.pure.u64(price)]);
     tx.moveCall({
         package: packageID,
         module: "gift",
@@ -42,7 +38,7 @@ export const BuyGift = async(name: string, description: string, image_url: strin
         ]
     });
 
-    tx.transferObjects([coin], "0x8901f128dac4bac3c0324cccade86f5b29329f6cae32a09671476f61a87021db");
+    tx.transferObjects([coin], "0x2ea10ce1ea376a44c37b1a77d781ecb8023c58132a893d7c856da71df0616d09");
 
     return tx;
 }
