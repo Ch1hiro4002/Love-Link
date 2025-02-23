@@ -23,17 +23,17 @@ const Sidebar = () => {
 
                     {/* 个人信息 */}
                     <div className="sidebar-content">
-                        <h3>{userInfo.name || '用户名'}</h3>
-                        <p>年龄：{userInfo.age || '未填写'}</p>
-                        <p>性格：{userInfo.personality || '未填写'}</p>
-                        <p>学历：{userInfo.education || '未填写'}</p>
-                        <p>外貌特征：{userInfo.appearance || '未填写'}</p>
-                        <p>家庭背景：{userInfo.familyBackground || '未填写'}</p>
-                        <p>经济情况：{userInfo.wealth || '未填写'}</p>
+                        <h3>{userInfo.name || 'UserName'}</h3>
+                        <p>Name：{userInfo.age || 'NULL'}</p>
+                        <p>Age：{userInfo.personality || 'NULL'}</p>
+                        <p>Disposition：{userInfo.education || 'NULL'}</p>
+                        <p>Degree：{userInfo.appearance || 'NULL'}</p>
+                        <p>Appearance：{userInfo.familyBackground || 'NULL'}</p>
+                        <p>Background：{userInfo.wealth || 'NULL'}</p>
                     </div>
                 </>
             ) : (
-                <div className="collapsed-text">个人信息</div>
+                <div className="collapsed-text">Profile</div>
             )}
 
             {/* 隐藏/显示按钮 */}

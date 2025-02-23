@@ -139,7 +139,7 @@ const Button = () => {
                             </div>
                         </div>
                         <button
-                            className="close-button"
+                            className="close-button1"
                             onClick={() => setShowShopModal(false)}
                         >
                             Close
@@ -256,7 +256,7 @@ const Button = () => {
                                 {isEditing ? 'Cancel' : 'Revise'}
                             </button>
                             <button
-                                className="close-button"
+                                className="close-button1"
                                 onClick={() => setShowUserModal(false)}
                             >
                                 Close

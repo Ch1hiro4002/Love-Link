@@ -26,7 +26,7 @@ graph LR
     A[前端] --> B[React+TypeScript]
     A --> C[Phaser.js游戏引擎]
     B --> D[AI交互界面]
-    C --> E[2D/3D场景渲染]
+    C --> E[2D场景渲染]
     
     F[后端] --> G[Node.js]
     G --> H[Eliza对话引擎]
